@@ -10,6 +10,8 @@ public class Aiming : MonoBehaviour
     public Bullet projectile;
     public float Speed;
     public float BulletLifeSpan;
+    public float BulletConstantSpeed;
+    public int BulletCountItems;
     void Update()
     {
         Vector3 targetDirection = Mouse.transform.position - gameObject.transform.position;
@@ -22,10 +24,14 @@ public class Aiming : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Bullet clone = Instantiate(projectile, transform.position, transform.rotation);
-            clone.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * Speed);
-            clone.LifeSpan = BulletLifeSpan;
-            clone.GameObject().SetActive(true);
+            for (int i = 0; i < BulletCountItems; i++)
+            {
+                Bullet clone = Instantiate(projectile, transform.position, transform.rotation);
+                clone.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * Speed);
+                clone.LifeSpan = BulletLifeSpan;
+                clone.Speed = BulletConstantSpeed;
+                clone.GameObject().SetActive(true);
+            }
         }
 
     }
