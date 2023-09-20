@@ -41,9 +41,8 @@ public class Gravity : MonoBehaviour
                DistanceX = transform.position.x - RigidBody1.transform.position.x;
                DistanceY = transform.position.y - RigidBody1.transform.position.y;
                Distance = Mathf.Sqrt((DistanceX * DistanceX) + (DistanceY * DistanceY));
-               //GravityForce = Mathf.Pow(-2, Distance);
+               GravityForce = Mathf.Log(2f, Distance);
                RigidBody1.GetComponent<Rigidbody>().AddForce(transform.position - RigidBody1.transform.position * GravityForce);
-               Debug.Log(transform.position - RigidBody1.transform.position * -GravityForce);
           }
      }
 
