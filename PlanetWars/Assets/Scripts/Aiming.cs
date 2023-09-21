@@ -9,20 +9,34 @@ public class Aiming : MonoBehaviour
     public float floatymickfloat;
     public Bullet projectile;
     public float Speed;
+    public float RotateSpeed;
     public float BulletLifeSpan;
     public float BulletConstantSpeed;
     public int BulletCountItems;
+    public KeyCode Fire;
+    public KeyCode Left;
+    public KeyCode Right;
     void Update()
     {
+        /*
         Vector3 targetDirection = Mouse.transform.position - gameObject.transform.position;
 
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, floatymickfloat, 0f);
 
         Debug.DrawRay(transform.position, newDirection, Color.red);
-
+        
         gameObject.transform.rotation = Quaternion.LookRotation(newDirection);
+        */
+        if (Input.GetKey(Left))
+        {   
+            transform.Rotate(transform.rotation.x - RotateSpeed,0,0);
+        }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKey(Right))
+        {
+            transform.Rotate(transform.rotation.x + RotateSpeed,0,0);
+        }
+        if (Input.GetKey(Fire))
         {
             for (int i = 0; i < BulletCountItems; i++)
             {

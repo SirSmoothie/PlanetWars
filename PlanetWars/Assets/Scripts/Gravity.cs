@@ -12,38 +12,33 @@ public class Gravity : MonoBehaviour
      public float DistanceX;
      public float DistanceY;
      public float GravityForce;
+     public Vector3 DirectionToObject;
+     public float multipler;
+     public float MaxDis;
      private void Start()
      {
           _objectsInField = new List<GameObject>();
      }
 
-     private void Update()
+     private void FixedUpdate()
      {
-          /*
+          
           //Finds all instances of an object with the component Rigidbody
           foreach (var rigidbody1 in FindObjectsByType<Rigidbody>(FindObjectsInactive.Exclude, FindObjectsSortMode.None))
           {
-               DistanceX = transform.position.x - rigidbody1.transform.position.x;
-               DistanceY = transform.position.y - rigidbody1.transform.position.y;
-               Distance = Mathf.Sqrt((DistanceX * DistanceX) + (DistanceY * DistanceY));
-               //The Amount of force being applied to other rigidbodys...
-               GravityMultiplier = Mathf.Pow( GravityForce,  Distance);
-               rigidbody1.AddForce(transform.position - rigidbody1.transform.position * GravityMultiplier);
-               
           }
-          */
+          
+          
           foreach (var RigidBody1 in _objectsInField)
           {
-               //RigidBody1.GetComponent<Rigidbody>().AddForce(transform.position - RigidBody1.transform.position);
-               
-               
-               //Making Gravity effect less the futher away and more when the object is closer.
                DistanceX = transform.position.x - RigidBody1.transform.position.x;
                DistanceY = transform.position.y - RigidBody1.transform.position.y;
                Distance = Mathf.Sqrt((DistanceX * DistanceX) + (DistanceY * DistanceY));
-               GravityForce = Mathf.Log(2f, Distance);
-               RigidBody1.GetComponent<Rigidbody>().AddForce(transform.position - RigidBody1.transform.position * GravityForce);
+               
+               GravityForce = Mathf.Pow(Mathf.Log(2f, Distance)+ 1, multipler);
+               RigidBody1.GetComponent<Rigidbody>().AddForce((transform.position - RigidBody1.transform.position) * GravityForce);
           }
+          
      }
 
      private void OnTriggerEnter(Collider other)
@@ -58,4 +53,5 @@ public class Gravity : MonoBehaviour
      {
           _objectsInField.Remove(other.gameObject);
      }
+     
 }
