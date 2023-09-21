@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -9,26 +10,33 @@ public class Bullet : MonoBehaviour
     public float Inert;
     private Rigidbody rg;
     public float Speed;
-    public Vector3 direction;
     private void Awake()
     {
         
         rg = gameObject.GetComponent<Rigidbody>();
-        Destroy(gameObject, LifeSpan);
     }
 
     void Update()
     {
-        Inert += Time.deltaTime;
+        LifeSpan -= Time.deltaTime;
+        if (LifeSpan <= 0f)
+        {
+            gameObject.SetActive(false);
+        }
+        Inert -= Time.deltaTime;
+        if (Inert <= 0f)
+        {
+            gameObject.GetComponent<SphereCollider>().enabled = true;
+        }
         Debug.DrawRay(transform.position, transform.forward);
         //direction = transform.forward;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Destroyable" && Inert >= 1)
+        if (Inert <= 0 && other.tag == "Destroyable")
         {
-            other.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 

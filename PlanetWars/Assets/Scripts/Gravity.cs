@@ -15,6 +15,7 @@ public class Gravity : MonoBehaviour
      public Vector3 DirectionToObject;
      public float multipler;
      public float MaxDis;
+     private GameObject Empty;
      private void Start()
      {
           _objectsInField = new List<GameObject>();
@@ -38,7 +39,6 @@ public class Gravity : MonoBehaviour
                GravityForce = Mathf.Pow(Mathf.Log(2f, Distance)+ 1, multipler);
                RigidBody1.GetComponent<Rigidbody>().AddForce((transform.position - RigidBody1.transform.position) * GravityForce);
           }
-          
      }
 
      private void OnTriggerEnter(Collider other)

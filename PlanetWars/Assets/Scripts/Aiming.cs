@@ -18,7 +18,7 @@ public class Aiming : MonoBehaviour
     public KeyCode Right;
     void Update()
     {
-        /*
+        
         Vector3 targetDirection = Mouse.transform.position - gameObject.transform.position;
 
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, floatymickfloat, 0f);
@@ -26,17 +26,8 @@ public class Aiming : MonoBehaviour
         Debug.DrawRay(transform.position, newDirection, Color.red);
         
         gameObject.transform.rotation = Quaternion.LookRotation(newDirection);
-        */
-        if (Input.GetKey(Left))
-        {   
-            transform.Rotate(transform.rotation.x - RotateSpeed,0,0);
-        }
-
-        if (Input.GetKey(Right))
-        {
-            transform.Rotate(transform.rotation.x + RotateSpeed,0,0);
-        }
-        if (Input.GetKey(Fire))
+        
+        if (Input.GetKeyDown(Fire))
         {
             for (int i = 0; i < BulletCountItems; i++)
             {
@@ -47,6 +38,30 @@ public class Aiming : MonoBehaviour
                 clone.GameObject().SetActive(true);
             }
         }
+        
+        
+        /*
+        if (Input.GetKey(Left))
+        {   
+            transform.Rotate(transform.rotation.x - RotateSpeed,0,0);
+        }
+
+        if (Input.GetKey(Right))
+        {
+            transform.Rotate(transform.rotation.x + RotateSpeed,0,0);
+        }
+        if (Input.GetKeyDown(Fire))
+        {
+            for (int i = 0; i < BulletCountItems; i++)
+            {
+                Bullet clone = Instantiate(projectile, transform.position, transform.rotation);
+                clone.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * Speed);
+                clone.LifeSpan = BulletLifeSpan;
+                clone.Speed = BulletConstantSpeed;
+                clone.GameObject().SetActive(true);
+            }
+        }
+        */
 
     }
 }
