@@ -13,6 +13,8 @@ public class Aiming : MonoBehaviour
     public float BulletLifeSpan;
     public float BulletConstantSpeed;
     public int BulletCountItems;
+    public GameObject turnTracker;
+    public GameObject mainBody;
     public KeyCode Fire;
     public KeyCode Left;
     public KeyCode Right;
@@ -29,14 +31,14 @@ public class Aiming : MonoBehaviour
         
         if (Input.GetKeyDown(Fire))
         {
-            for (int i = 0; i < BulletCountItems; i++)
-            {
-                Bullet clone = Instantiate(projectile, transform.position, transform.rotation);
-                clone.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * Speed);
-                clone.LifeSpan = BulletLifeSpan;
-                clone.Speed = BulletConstantSpeed;
-                clone.GameObject().SetActive(true);
-            }
+            Bullet clone = Instantiate(projectile, transform.position, transform.rotation);
+            clone.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * Speed);
+            clone.LifeSpan = BulletLifeSpan;
+            clone.Speed = BulletConstantSpeed;
+            clone.Inert = 0.5f;
+            clone.GameObject().SetActive(true);
+            turnTracker.GetComponent<TurnTracker>().activeBullet = clone.gameObject;
+            mainBody.GetComponent<PlayerActivator>().Activated = false;
         }
         
         

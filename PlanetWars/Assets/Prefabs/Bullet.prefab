@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LifeSpan: 1
-  Inert: 1
+  Inert: 0.1
   Speed: 2000
 --- !u!54 &7479426468583734391
 Rigidbody:
