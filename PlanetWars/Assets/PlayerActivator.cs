@@ -9,6 +9,13 @@ public class PlayerActivator : MonoBehaviour
     public GameObject view;
     public bool Alive;
     public bool Activated;
+    public GameObject turnTracker;
+
+    private void Start()
+    {
+        turnTracker.GetComponent<TurnTracker>().players.Add(gameObject);
+        turnTracker.GetComponent<TurnTracker>().GameStarted = true;
+    }
 
     private void Update()
     {

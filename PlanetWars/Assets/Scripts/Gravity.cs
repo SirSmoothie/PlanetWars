@@ -16,9 +16,23 @@ public class Gravity : MonoBehaviour
      public float multipler;
      public float MaxDis;
      private GameObject Empty;
+     public AnimationCurve gravityCurve;
+     public float gravityCurveTimer;
+     public float gravityMultiplier;
      private void Start()
      {
           _objectsInField = new List<GameObject>();
+     }
+
+     private void Update()
+     {
+          for (int i = 0; i < _objectsInField.Count; i++)
+          {
+               if (!_objectsInField[i].activeSelf)
+               {
+                    _objectsInField.RemoveAt(i);
+               }
+          }
      }
 
      private void FixedUpdate()
@@ -35,9 +49,19 @@ public class Gravity : MonoBehaviour
                DistanceX = transform.position.x - RigidBody1.transform.position.x;
                DistanceY = transform.position.y - RigidBody1.transform.position.y;
                Distance = Mathf.Sqrt((DistanceX * DistanceX) + (DistanceY * DistanceY));
+               gravityCurveTimer = Distance / MaxDis;
+               
+               GravityForce = gravityCurve.Evaluate(gravityCurveTimer);
+               
+               /*
+               DistanceX = transform.position.x - RigidBody1.transform.position.x;
+               DistanceY = transform.position.y - RigidBody1.transform.position.y;
+               Distance = Mathf.Sqrt((DistanceX * DistanceX) + (DistanceY * DistanceY));
                
                GravityForce = Mathf.Pow(Mathf.Log(2f, Distance)+ 1, multipler);
-               RigidBody1.GetComponent<Rigidbody>().AddForce((transform.position - RigidBody1.transform.position) * GravityForce);
+               */
+               
+               RigidBody1.GetComponent<Rigidbody>().AddForce((transform.position - RigidBody1.transform.position) * (GravityForce * gravityMultiplier));
           }
      }
 

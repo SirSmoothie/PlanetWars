@@ -7,16 +7,16 @@ using UnityEngine;
 public class TurnTracker : MonoBehaviour
 {
     public List<GameObject> players;
-    public int turnCounter;
     public GameObject CameraAnchor;
     public GameObject activeBullet;
     public float CamSpeed;
     public bool isActiveBullet;
     public bool wasActiveBullet;
-    public int playerCount;
     public int nextPlayer = 1;
     public int currentPlayer;
     public int Repeatable = 2;
+    public bool GameStarted = false;
+    public bool PlayerOneSet = false;
 
     private void Start()
     {
@@ -28,7 +28,11 @@ public class TurnTracker : MonoBehaviour
 
     private void Update()
     {
-        
+        if (GameStarted && !PlayerOneSet)
+        {
+            players[0].GetComponent<PlayerActivator>().Activated = true;
+            PlayerOneSet = true;
+        }
         if (Input.GetKeyDown("g"))
         {
             players[currentPlayer].GetComponent<PlayerActivator>().Activated = false;
