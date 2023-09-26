@@ -13,22 +13,16 @@ public class PointTowards : MonoBehaviour
     {
         if (notActive)
         {
+            //sets the objects location to the gameobjects position PointToLast if the playerActivator is not active.
             Vector3 targetDirection = pointToLast.transform.position - gameObject.transform.position;
-
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, maxRadians, 0f);
-
-            Debug.DrawRay(transform.position, newDirection, Color.red);
-        
             gameObject.transform.rotation = Quaternion.LookRotation(newDirection);
         }
         else
         {
+            //While the player has control of the player it sets the position of where the cannon should point to to the current mouse position.
             Vector3 targetDirection = pointToCurrent.transform.position - gameObject.transform.position;
-
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, maxRadians, 0f);
-
-            Debug.DrawRay(transform.position, newDirection, Color.red);
-        
             gameObject.transform.rotation = Quaternion.LookRotation(newDirection);
         }
     }

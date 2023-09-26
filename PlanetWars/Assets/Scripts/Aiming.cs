@@ -10,22 +10,20 @@ public class Aiming : MonoBehaviour
     public Bullet projectile;
     public float Speed;
     public float BulletLifeSpan;
-    public float BulletConstantSpeed;
+    //public float BulletConstantSpeed; variable for old script
     public GameObject turnTracker;
     public GameObject mainBody;
     public GameObject lastShotObject;
     public KeyCode Fire;
     void Update()
     {
-        
+        //makes the gameobject look towards the pointTo gameobject (which is fixed on the mouse position on the screen).
         Vector3 targetDirection = pointTo.transform.position - gameObject.transform.position;
-
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, floatymickfloat, 0f);
-
-        Debug.DrawRay(transform.position, newDirection, Color.red);
-        
         gameObject.transform.rotation = Quaternion.LookRotation(newDirection);
         
+        //when the fire key is pressed it makes a clone of the bullet prefab and sets a value for fuel and inert (see the Bullet script for details on those).
+        //It also finds the Turn tracker and sets the activeBullet gameobject to the bullet that was just cloned.
         if (Input.GetKeyDown(Fire))
         {
             Bullet clone = Instantiate(projectile, transform.position, transform.rotation);
@@ -34,6 +32,8 @@ public class Aiming : MonoBehaviour
             clone.Inert = 0.5f;
             clone.GameObject().SetActive(true);
             turnTracker.GetComponent<TurnTracker>().activeBullet = clone.gameObject;
+            
+            //this sends the players own lastShotObject object the bool wasShot as true (see ShotLocation Script for more detail).
             lastShotObject.GetComponent<ShotLocation>().wasShot = true;
             
             //This must be the last line in sequence, otherwise It shuts off before it can finish the entire script. (like a break Function)
