@@ -6,10 +6,16 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float LifeSpan;
+    public float fuelUsageRate;
     public float Inert;
     private Rigidbody rg;
-    public float Speed;
+    public float fuel;
+    public float TurnSpeed;
+    public KeyCode Left;
+    public KeyCode Right;
+    public KeyCode Forward;
+    public float outOfFuelTimer;
+    public GameObject fuelUsageIndicator;
     private void Awake()
     {
         
@@ -18,8 +24,12 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        LifeSpan -= Time.deltaTime;
-        if (LifeSpan <= 0f)
+        if (fuel <= 0f)
+        {
+            outOfFuelTimer -= Time.deltaTime;
+        }
+
+        if (outOfFuelTimer <= 0)
         {
             gameObject.SetActive(false);
         }
@@ -29,19 +39,27 @@ public class Bullet : MonoBehaviour
             gameObject.GetComponent<SphereCollider>().enabled = true;
         }
         Debug.DrawRay(transform.position, transform.forward);
-        //direction = transform.forward;
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (Inert <= 0 && other.tag == "Destroyable")
+        if (Input.GetKey(Left))
         {
-            gameObject.SetActive(false);
+            transform.Rotate(-TurnSpeed, 0f,0f);
+        }
+        
+        if (Input.GetKey(Right))
+        {
+            transform.Rotate(TurnSpeed, 0f,0f);
+        }
+        
+        if (Input.GetKey(Forward) && fuel >= 0)
+        {
+            fuelUsageIndicator.SetActive(true);
+            gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * fuel);
+            fuel -= fuelUsageRate;
+        }
+        else
+        {
+            fuelUsageIndicator.SetActive(false);
         }
     }
-
-    private void FixedUpdate()
-    {
-        //rg.velocity = direction * Speed;
-    }
+    
 }

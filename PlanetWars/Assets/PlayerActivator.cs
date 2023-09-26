@@ -6,10 +6,10 @@ using UnityEngine;
 public class PlayerActivator : MonoBehaviour
 {
     public GameObject controller;
-    public GameObject view;
     public bool Alive;
     public bool Activated;
     public GameObject turnTracker;
+    public GameObject cannonView;
 
     private void Start()
     {
@@ -22,12 +22,12 @@ public class PlayerActivator : MonoBehaviour
         if (Activated)
         {
             controller.SetActive(true);
-            view.SetActive(false);
+            cannonView.GetComponent<PointTowards>().notActive = false;
         }
         else
         {
-            view.SetActive(true);
             controller.SetActive(false);
+            cannonView.GetComponent<PointTowards>().notActive = true;
         }
 
         if (!Alive)

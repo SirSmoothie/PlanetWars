@@ -12,6 +12,7 @@ public class LevelGenerator : MonoBehaviour
     public GameObject Moon;
     public GameObject Planet;
     public GameObject PlayerCharacter;
+    public GameObject wall;
     public float x;
     public float y;
     public Vector3 genTarget;
@@ -48,8 +49,9 @@ public class LevelGenerator : MonoBehaviour
             GameObject InstancitedAsset;
             InstancitedAsset = Instantiate(PlayerCharacter, genTarget, Quaternion.identity, PlayerBodyParents.transform);
             InstancitedAsset.GetComponent<PlayerActivator>().turnTracker = TurnTrackerObject;
-            InstancitedAsset.GetComponent<PlayerActivator>().controller.GetComponent<Aiming>().Mouse = MouseObject;
+            InstancitedAsset.GetComponent<PlayerActivator>().controller.GetComponent<Aiming>().pointTo = MouseObject;
             InstancitedAsset.GetComponent<PlayerActivator>().controller.GetComponent<Aiming>().turnTracker = TurnTrackerObject;
         }
+        
     }
 }

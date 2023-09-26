@@ -5,23 +5,20 @@ using UnityEngine;
 
 public class Aiming : MonoBehaviour
 {
-    public GameObject Mouse;
+    public GameObject pointTo;
     public float floatymickfloat;
     public Bullet projectile;
     public float Speed;
-    public float RotateSpeed;
     public float BulletLifeSpan;
     public float BulletConstantSpeed;
-    public int BulletCountItems;
     public GameObject turnTracker;
     public GameObject mainBody;
+    public GameObject lastShotObject;
     public KeyCode Fire;
-    public KeyCode Left;
-    public KeyCode Right;
     void Update()
     {
         
-        Vector3 targetDirection = Mouse.transform.position - gameObject.transform.position;
+        Vector3 targetDirection = pointTo.transform.position - gameObject.transform.position;
 
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, floatymickfloat, 0f);
 
@@ -33,11 +30,13 @@ public class Aiming : MonoBehaviour
         {
             Bullet clone = Instantiate(projectile, transform.position, transform.rotation);
             clone.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * Speed);
-            clone.LifeSpan = BulletLifeSpan;
-            clone.Speed = BulletConstantSpeed;
+            clone.fuel = BulletLifeSpan;
             clone.Inert = 0.5f;
             clone.GameObject().SetActive(true);
             turnTracker.GetComponent<TurnTracker>().activeBullet = clone.gameObject;
+            lastShotObject.GetComponent<ShotLocation>().wasShot = true;
+            
+            //This must be the last line in sequence, otherwise It shuts off before it can finish the entire script. (like a break Function)
             mainBody.GetComponent<PlayerActivator>().Activated = false;
         }
         

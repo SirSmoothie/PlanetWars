@@ -8,6 +8,9 @@ public class PlayerStatus : MonoBehaviour
     public GameObject parent;
     private void OnTriggerEnter(Collider other)
     {
-        parent.GetComponent<PlayerActivator>().Alive = false;
+        if (other.gameObject.tag == "Bullet")
+        {
+            parent.GetComponent<PlayerActivator>().Alive = false;
+        }
     }
 }
