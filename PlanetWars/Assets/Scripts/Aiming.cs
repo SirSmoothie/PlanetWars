@@ -15,13 +15,18 @@ public class Aiming : MonoBehaviour
     public GameObject mainBody;
     public GameObject lastShotObject;
     public KeyCode Fire;
+    public FuelManagerUI fuelManager;
     void Update()
     {
         //makes the gameobject look towards the pointTo gameobject (which is fixed on the mouse position on the screen).
         Vector3 targetDirection = pointTo.transform.position - gameObject.transform.position;
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, floatymickfloat, 0f);
         gameObject.transform.rotation = Quaternion.LookRotation(newDirection);
-        
+
+        if (transform.rotation.y <= 0)
+        {
+            //Debug.Log("LEFT");
+        }
         //when the fire key is pressed it makes a clone of the bullet prefab and sets a value for fuel and inert (see the Bullet script for details on those).
         //It also finds the Turn tracker and sets the activeBullet gameobject to the bullet that was just cloned.
         if (Input.GetKeyDown(Fire))
@@ -30,6 +35,15 @@ public class Aiming : MonoBehaviour
             clone.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * Speed);
             clone.fuel = BulletLifeSpan;
             clone.Inert = 0.5f;
+            fuelManager.bullet = clone;
+            fuelManager.newBullet = true;
+            if (transform.rotation.y == -90)
+            {
+                Debug.Log("facing Left");
+                //this flips the controls when the turret turns around.
+                clone.TurnSpeed = -clone.TurnSpeed;
+                Debug.Log(clone.TurnSpeed);
+            }
             clone.GameObject().SetActive(true);
             turnTracker.GetComponent<TurnTracker>().activeBullet = clone.gameObject;
             

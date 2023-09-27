@@ -60,6 +60,18 @@ public class Bullet : MonoBehaviour
             //turns off a gameobject so players know they are using fuel.
             fuelUsageIndicator.SetActive(false);
         }
+        
+        DisplayFuel();
+    }
+    
+    
+    public delegate void FuelDelegate(float f);
+
+    public event FuelDelegate DisplayFuelEvent;
+
+    public void DisplayFuel()
+    {
+        DisplayFuelEvent?.Invoke(fuel);
     }
     
 }

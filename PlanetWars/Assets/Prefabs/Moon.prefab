@@ -129,13 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2657aafbc4544fc4989b4910b69a8fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectsInField: []
-  Distance: 0
-  DistanceX: 0
-  DistanceY: 0
-  GravityForce: 0.1
-  DirectionToObject: {x: 0, y: 0, z: 0}
-  multipler: 2
   MaxDis: 50
   gravityCurve:
     serializedVersion: 2
@@ -150,14 +143,14 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.19832614
     - serializedVersion: 3
-      time: 0.17523639
-      value: 0.3052962
-      inSlope: -1.2065396
-      outSlope: -1.2065396
+      time: 0.06964291
+      value: 0.102039725
+      inSlope: -0.35198912
+      outSlope: -0.35198912
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.32564056
-      outWeight: 0.27014434
+      inWeight: 0.33333334
+      outWeight: 0.08075267
     - serializedVersion: 3
       time: 1
       value: 0
@@ -170,7 +163,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  gravityCurveTimer: 0
   gravityMultiplier: 2
 --- !u!135 &5629366591485183511
 SphereCollider:

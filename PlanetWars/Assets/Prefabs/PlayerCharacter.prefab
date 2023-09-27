@@ -175,7 +175,7 @@ Transform:
   m_GameObject: {fileID: 4105817788005588240}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.05}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -384,11 +384,11 @@ MonoBehaviour:
   projectile: {fileID: 7685089431069494026, guid: edcb7a562453b52468aa54649e234792, type: 3}
   Speed: 20
   BulletLifeSpan: 20
-  BulletConstantSpeed: 10
   turnTracker: {fileID: 0}
   mainBody: {fileID: 8948754779619473165}
   lastShotObject: {fileID: 9075838848920978561}
-  Fire: 119
+  Fire: 111
+  fuelManager: {fileID: 0}
 --- !u!1 &6908002687385802047
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,9 +612,9 @@ Transform:
   m_Children:
   - {fileID: 152502010893212214}
   - {fileID: 7799365236061085553}
+  - {fileID: 2886631335759403651}
   - {fileID: 1259660200345674297}
   - {fileID: 5997124170838645181}
-  - {fileID: 2886631335759403651}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2849892175135929974

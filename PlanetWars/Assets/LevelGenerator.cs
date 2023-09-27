@@ -19,6 +19,7 @@ public class LevelGenerator : MonoBehaviour
     public GameObject PlanetBodyParents;
     public GameObject PlayerBodyParents;
     public GameObject TurnTrackerObject, MouseObject;
+    public FuelManagerUI fuelManagerUI;
     private void Start()
     {
         for (int i = 0; i < numberOfPlanets; i++)
@@ -49,6 +50,7 @@ public class LevelGenerator : MonoBehaviour
             GameObject InstancitedAsset;
             InstancitedAsset = Instantiate(PlayerCharacter, genTarget, Quaternion.identity, PlayerBodyParents.transform);
             InstancitedAsset.GetComponent<PlayerActivator>().turnTracker = TurnTrackerObject;
+            InstancitedAsset.GetComponent<PlayerActivator>().controller.GetComponent<Aiming>().fuelManager = fuelManagerUI;
             InstancitedAsset.GetComponent<PlayerActivator>().controller.GetComponent<Aiming>().pointTo = MouseObject;
             InstancitedAsset.GetComponent<PlayerActivator>().controller.GetComponent<Aiming>().turnTracker = TurnTrackerObject;
         }
