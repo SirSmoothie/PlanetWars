@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     public float fuelUsageRate;
     public float Inert;
     public float fuel = 1;
+    private float fuelMax;
     private float rocketForce = 10;
     public float TurnSpeed;
     public KeyCode Left;
@@ -16,6 +17,11 @@ public class Bullet : MonoBehaviour
     public KeyCode Forward;
     public float outOfFuelTimer;
     public GameObject fuelUsageIndicator;
+
+    private void OnEnable()
+    {
+        fuelMax = fuel;
+    }
 
     void Update()
     {
@@ -65,13 +71,13 @@ public class Bullet : MonoBehaviour
     }
     
     
-    public delegate void FuelDelegate(float f);
+    public delegate void FuelDelegate(float f, float fM);
 
     public event FuelDelegate DisplayFuelEvent;
 
     public void DisplayFuel()
     {
-        DisplayFuelEvent?.Invoke(fuel);
+        DisplayFuelEvent?.Invoke(fuel, fuelMax);
     }
     
 }

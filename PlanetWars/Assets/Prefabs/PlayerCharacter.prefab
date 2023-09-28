@@ -387,7 +387,7 @@ MonoBehaviour:
   turnTracker: {fileID: 0}
   mainBody: {fileID: 8948754779619473165}
   lastShotObject: {fileID: 9075838848920978561}
-  Fire: 111
+  Fire: 323
   fuelManager: {fileID: 0}
 --- !u!1 &6908002687385802047
 GameObject:

@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FuelManagerUI : MonoBehaviour
 {
     public TextMeshProUGUI fuelAmount;
+    public Slider fuelGuage;
+    public float fuelMax;
 
     public float fuel;
     public Bullet bullet;
@@ -14,11 +17,12 @@ public class FuelManagerUI : MonoBehaviour
 
     void Update()
     {
+        
         if (newBullet)
         {
             bullet.DisplayFuelEvent += TestFunction;
         }
-        else
+        if(!newBullet)
         {
             bullet.DisplayFuelEvent -= TestFunction;
         }
@@ -27,14 +31,19 @@ public class FuelManagerUI : MonoBehaviour
         {
             newBullet = false;
         }
+            
+        
     }
 
 
-    public void TestFunction(float f)
+    public void TestFunction(float f, float fM)
     {
-        fuel = f;
-        fuelAmount.text = fuel.ToString();
-        //Debug.Log(fuel);
+            fuel = f;
+            fuelMax = fM;
+            fuelGuage.maxValue = fuelMax;
+            fuelGuage.value = fuel; 
+            fuelAmount.text = fuel.ToString();
+            //Debug.Log(fuel);
     }
     
     
