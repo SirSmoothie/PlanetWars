@@ -6,12 +6,13 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     public float dmg;
-    public float Inert = 1;
+    public float strength;
+    public float inert = 1;
     public Destroyable destroyable;
     private void OnCollisionEnter(Collision other)
     {
-        other.gameObject.GetComponent<Destroyable>().TakeDmg(dmg);
-        destroyable.TakeDmg(dmg);
+        other.gameObject.GetComponent<Destroyable>().TakeDmg(dmg, strength);
+        destroyable.TakeDmg(dmg, strength);
     }
 
     private void Update()
@@ -21,8 +22,8 @@ public class BulletController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        Inert -= Time.deltaTime;
-        if (Inert <= 0)
+        inert -= Time.deltaTime;
+        if (inert <= 0)
         {
             gameObject.GetComponent<Collider>().enabled = true;
         }

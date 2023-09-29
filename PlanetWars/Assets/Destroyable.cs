@@ -6,11 +6,12 @@ public class Destroyable : MonoBehaviour
 {
     public float health;
     public float armour;
-    private float finDmg;
 
-    public void TakeDmg(float dmg)
+    public void TakeDmg(float dmg, float strength)
     {
-        finDmg = dmg - armour;
-        health -= finDmg;
+        if (strength > armour || strength == armour)
+        {
+            health -= dmg;
+        }
     }
 }
