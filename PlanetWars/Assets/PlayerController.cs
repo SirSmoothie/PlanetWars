@@ -50,7 +50,6 @@ public class PlayerController : MonoBehaviour
             clone = Instantiate(projectile, spawnLocation.transform.position, transform.rotation, bulletFolder.transform);
             clone.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * bulletSpeed);
             clone.dmg = bulletDmg;
-            clone.strength = bulletStrength;
             clone.inert = 0;
         }
 

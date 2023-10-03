@@ -1,27 +1,31 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
     public float dmg;
-    public float strength;
     public float inert = 1;
-    public Destroyable destroyable;
+    public bool hasHitSmth = false;
     private void OnCollisionEnter(Collision other)
     {
-        other.gameObject.GetComponent<Destroyable>().TakeDmg(dmg, strength);
-        destroyable.TakeDmg(dmg, strength);
-    }
-
-    private void Update()
-    {
-        if (destroyable.health <= 0)
+        IDamageable damageable = other.transform.GetComponent<IDamageable>();
+        if (damageable != null && !hasHitSmth)
         {
+            damageable.Damage(dmg);
+            hasHitSmth = true;
             Destroy(gameObject);
         }
+    }
 
+    void Thannossed()
+    {
+        Destroy(gameObject);
+    }
+    private void Update()
+    {
         inert -= Time.deltaTime;
         if (inert <= 0)
         {

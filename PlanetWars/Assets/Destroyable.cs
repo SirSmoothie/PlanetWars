@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Destroyable : MonoBehaviour
+public class Destroyable : MonoBehaviour, IDamageable
 {
     public float health;
-    public float armour;
 
-    public void TakeDmg(float dmg, float strength)
+    public void TakeDmg(float dmg)
     {
-        if (strength > armour || strength == armour)
-        {
-            health -= dmg;
-        }
+        health -= dmg;
+    }
+
+    public void Damage(float damageAmount)
+    {
+        TakeDmg(damageAmount);
     }
 }
