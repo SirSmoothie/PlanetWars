@@ -8,11 +8,13 @@ public class DoorClosing : MonoBehaviour
     public float closing;
     public DoorClosed closed;
     public GameObject topDoor;
+    public GameObject topDoorPos;
     public GameObject bottomDoor;
+    public GameObject bottomDoorPos;
     public float Speed;
     private void OnEnable()
     {
-        
+        StartDoorClosing();
     }
 
     private void Update()
@@ -21,13 +23,13 @@ public class DoorClosing : MonoBehaviour
         {
             DoorClosed();
         }
-        else
-        {
-            topDoor.transform.DOMove(new Vector3(transform.position.x, 0, transform.position.z), Speed);
-            bottomDoor.transform.DOMove(new Vector3(transform.position.x, 0, transform.position.z), Speed);
-        }
     }
 
+    void StartDoorClosing()
+    {
+        topDoor.transform.DOMove(new Vector3(bottomDoor.transform.position.x, transform.position.y, bottomDoor.transform.position.z), Speed);
+        bottomDoor.transform.DOMove(new Vector3(bottomDoor.transform.position.x, transform.position.y, bottomDoor.transform.position.z), Speed);
+    }
     void DoorClosed()
     {
         gameObject.GetComponent<DoorStateManager>().ChangeState(closed);

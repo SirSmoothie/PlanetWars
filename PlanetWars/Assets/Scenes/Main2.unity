@@ -3344,7 +3344,9 @@ MonoBehaviour:
   Opening: 0
   opened: {fileID: 1235224370}
   topDoor: {fileID: 2065870863}
+  topDoorPos: {fileID: 1515926804}
   bottomDoor: {fileID: 1851379230}
+  bottomDoorPos: {fileID: 1281642421}
   Speed: 2
 --- !u!114 &1235224370
 MonoBehaviour:
@@ -3374,7 +3376,9 @@ MonoBehaviour:
   closing: 0
   closed: {fileID: 1235224372}
   topDoor: {fileID: 2065870863}
+  topDoorPos: {fileID: 1515926804}
   bottomDoor: {fileID: 1851379230}
+  bottomDoorPos: {fileID: 1281642421}
   Speed: 2
 --- !u!114 &1235224372
 MonoBehaviour:
@@ -3418,6 +3422,8 @@ Transform:
   m_Children:
   - {fileID: 1851379231}
   - {fileID: 2065870864}
+  - {fileID: 1515926805}
+  - {fileID: 1281642422}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1235224375
@@ -3498,6 +3504,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53ff678ca24439e459f590c6f969335f, type: 3}
+--- !u!1 &1281642421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1281642422}
+  m_Layer: 0
+  m_Name: BottomDoorOpenPostion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1281642422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281642421}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1235224374}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1318546630
 GameObject:
   m_ObjectHideFlags: 0
@@ -3940,6 +3977,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53ff678ca24439e459f590c6f969335f, type: 3}
+--- !u!1 &1515926804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1515926805}
+  m_Layer: 0
+  m_Name: TopDoorOpenPostion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1515926805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515926804}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1235224374}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1522358392
 PrefabInstance:
   m_ObjectHideFlags: 0
