@@ -12,6 +12,7 @@ public class Crystal : MonoBehaviour
         if (pickupable != null)
         {
             pickupable.Pickup(crystalValue);
+            Destroy(gameObject);
         }
     }
 }
