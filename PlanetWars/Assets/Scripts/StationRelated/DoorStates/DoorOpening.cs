@@ -20,7 +20,7 @@ public class DoorOpening : MonoBehaviour
 
     public void Update()
     {
-        if (topDoor.transform.position.x >= 2.5f)
+        if (topDoor.transform.position.y >= topDoorPos.transform.position.y)
         {
             DoorOpened();
         }

@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float turnSpeed;
     public float DashForce;
-    public Rigidbody rb;
+    private Rigidbody rb;
     public KeyCode left;
     public KeyCode right;
     public KeyCode forward;
@@ -21,6 +21,15 @@ public class PlayerController : MonoBehaviour
     public GameObject spawnLocation;
     public GameObject bulletFolder;
     private Quaternion NoRotation;
+    public float dashCooldown;
+    public float dashCooldownMax;
+    public bool dashAbility;
+
+
+    private void Start()
+    {
+        rb = gameObject.GetComponent<Rigidbody>();
+    }
 
     void Update()
     {
@@ -53,9 +62,18 @@ public class PlayerController : MonoBehaviour
             clone.inert = 0;
         }
 
-        if (Input.GetKeyDown(Dash))
+        if (Input.GetKeyDown(Dash) && dashCooldown <= 0 && dashAbility)
         {
             rb.AddForce(transform.forward * DashForce,ForceMode.Impulse);
+            dashCooldown = dashCooldownMax;
+        }
+        else if(dashCooldown >= 0.01)
+        {
+            dashCooldown -= Time.deltaTime;
+        }
+        else
+        {
+            dashCooldown = 0;
         }
     }
 }

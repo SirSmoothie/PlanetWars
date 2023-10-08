@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149d83e722cfea4479703df6ff742f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crystalValue: 5
+  crystalValue: 50
 --- !u!65 &5880102097707769507
 BoxCollider:
   m_ObjectHideFlags: 0
