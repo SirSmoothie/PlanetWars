@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
     public float dashCooldown;
     public float dashCooldownMax;
     public bool dashAbility;
+    public float fireRate;
+    private bool currentFire;
 
 
     private void Start()
@@ -53,13 +56,14 @@ public class PlayerController : MonoBehaviour
         {
             transform.Rotate(0f, 0f, 0f);
         }
-        if (Input.GetKeyDown(fire))
+        if (Input.GetKey(fire) && !currentFire)
         {
-            BulletController clone;
-            clone = Instantiate(projectile, spawnLocation.transform.position, transform.rotation, bulletFolder.transform);
-            clone.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * bulletSpeed);
-            clone.dmg = bulletDmg;
-            clone.inert = 0;
+            currentFire = true;
+            StartCoroutine(Fire());
+        }
+        if (Input.GetKeyUp(fire) && !currentFire)
+        {
+            currentFire = false;
         }
 
         if (Input.GetKeyDown(Dash) && dashCooldown <= 0 && dashAbility)
@@ -75,5 +79,16 @@ public class PlayerController : MonoBehaviour
         {
             dashCooldown = 0;
         }
+    }
+    
+    IEnumerator Fire()
+    {
+        BulletController clone;
+        clone = Instantiate(projectile, spawnLocation.transform.position, transform.rotation, bulletFolder.transform);
+        clone.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * bulletSpeed);
+        clone.dmg = bulletDmg;
+        clone.inert = 0;
+        yield return new WaitForSeconds(fireRate);
+        currentFire = false;
     }
 }
