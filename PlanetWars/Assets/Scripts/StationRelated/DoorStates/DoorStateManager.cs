@@ -6,15 +6,15 @@ using UnityEngine.XR;
 
 public class DoorStateManager : MonoBehaviour
 {
-    public MonoBehaviour startingState;
-    public MonoBehaviour currentState;
+    public StateBase startingState;
+    public StateBase currentState;
 
     private void Start()
     {
         ChangeState(startingState);
     }
 
-    public void ChangeState(MonoBehaviour newState)
+    public void ChangeState(StateBase newState)
     {
         if (newState == currentState)
         {

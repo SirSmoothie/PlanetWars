@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class DoorOpening : MonoBehaviour
+public class DoorOpening : StateBase
 {
-    public float Opening;
-    public DoorOpen opened;
     public GameObject topDoor;
     public GameObject topDoorPos;
     public GameObject bottomDoor;
@@ -22,7 +20,7 @@ public class DoorOpening : MonoBehaviour
     {
         if (topDoor.transform.position.y >= topDoorPos.transform.position.y)
         {
-            DoorOpened();
+            ChangeState();
         }
     }
 
@@ -32,12 +30,8 @@ public class DoorOpening : MonoBehaviour
         bottomDoor.transform.DOMove(new Vector3(bottomDoor.transform.position.x, bottomDoorPos.transform.position.y, bottomDoor.transform.position.z), Speed);
     }
 
-    void DoorOpened()
+    void ChangeState()
     {
-        gameObject.GetComponent<DoorStateManager>().ChangeState(opened);
-    }
-    private void OnDisable()
-    {
-        Opening = 0;
+        Change();
     }
 }

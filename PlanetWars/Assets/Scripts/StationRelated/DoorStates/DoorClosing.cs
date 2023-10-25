@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class DoorClosing : MonoBehaviour
+public class DoorClosing : StateBase
 {
-    public DoorClosed closed;
     public GameObject topDoor;
     public GameObject bottomDoor;
     public GameObject doorClosedPos;
@@ -30,9 +29,6 @@ public class DoorClosing : MonoBehaviour
     }
     void DoorClosed()
     {
-        gameObject.GetComponent<DoorStateManager>().ChangeState(closed);
-    }
-    private void OnDisable()
-    {
+        Change();
     }
 }
