@@ -2873,6 +2873,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5c44775d6fc17344a0d9f405bc25fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &813956537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813956526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b311791b128268c45be98041fbd70d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  turnSpeed: 10
+  DashForce: 50
+  bulletSpeed: 100
+  bulletDmg: 2
+  bulletStrength: 0
+  fireRate: 0.25
+  dashAbility: 0
 --- !u!1001 &830634157
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4444,23 +4464,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eabe4c83fa7d6b4db4cc775ba134794, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
-  turnSpeed: 2
-  DashForce: 50
-  left: 97
-  right: 100
-  forward: 119
-  fire: 32
-  Dash: 304
+  playerModel: {fileID: 0}
+  left: 0
+  right: 0
+  forward: 0
+  fire: 0
+  dash: 0
   projectile: {fileID: 8734082258913942902, guid: f1840e251d0300949b19417148f7b951, type: 3}
-  bulletSpeed: 50
-  bulletDmg: 2
-  bulletStrength: 0
   spawnLocation: {fileID: 983336787}
   bulletFolder: {fileID: 785939272}
   dashCooldown: 0
   dashCooldownMax: 5
-  dashAbility: 0
 --- !u!65 &1318546634
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4508,7 +4522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playingState: {fileID: 1318546637}
-  buttonEvent: {fileID: 1373220126}
+  exitShopButtonEvent: {fileID: 0}
 --- !u!114 &1318546637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4536,7 +4550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a914db7fb3c28043893720425ee450e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 1318546633}
+  playerModel: {fileID: 0}
   inv: {fileID: 1318546635}
   buyDash: {fileID: 1611175834}
   buyDmg: {fileID: 1709649063}
@@ -7204,7 +7218,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1524314591558185955, guid: 7aff3eee871f21648879d1c4641877c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 813956537}
   m_SourcePrefab: {fileID: 100100000, guid: 7aff3eee871f21648879d1c4641877c3, type: 3}
 --- !u!1001 &5801928561437988595
 PrefabInstance:

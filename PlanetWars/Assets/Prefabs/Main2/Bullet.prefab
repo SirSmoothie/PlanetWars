@@ -51,6 +51,7 @@ MonoBehaviour:
   dmg: 3
   inert: 1
   hasHitSmth: 0
+  bulletRange: 0.2
 --- !u!114 &5770982836930538728
 MonoBehaviour:
   m_ObjectHideFlags: 0

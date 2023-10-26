@@ -5,22 +5,26 @@ using UnityEngine;
 
 public class PlayerAbilities : MonoBehaviour
 {
-    public PlayerController playerController;
+    public PlayerModel playerModel;
     public PlayerInventory inv;
     public ButtonEvent buyDash;
     public ButtonEvent buyDmg;
-    private int dmgLevel;
+    public ButtonEvent buyRange;
+    private int dmgLevel = 1;
+    private int rangeLevel = 1;
     public int moreBulletDmg;
+    public float moreBulletRange;
 
     private void OnEnable()
     {
+        buyRange.ButtonPressedIntValueEvent += BuyRange;
         buyDash.ButtonPressedIntValueEvent += BuyDash;
         buyDmg.ButtonPressedIntValueEvent += BuyMoreDmg;
     }
 
     private void Start()
     {
-        playerController = gameObject.GetComponent<PlayerController>();
+        playerModel = gameObject.GetComponent<PlayerModel>();
     }
 
     void BuyMoreDmg(int dmgCost)
@@ -30,21 +34,36 @@ public class PlayerAbilities : MonoBehaviour
         {
             dmgLevel++;
             inv.crystalCurrency -= dmgcost;
-            playerController.bulletDmg += moreBulletDmg;
+            playerModel.bulletDmg += moreBulletDmg;
         }
     }
+    
+    public delegate void DashBought();
 
+    public event DashBought DashBoughtEvent;
     void BuyDash(int dashCost)
     {
-        if (inv.crystalCurrency >= dashCost && !playerController.dashAbility)
+        if (inv.crystalCurrency >= dashCost && !playerModel.dashAbility)
         {
-            playerController.dashAbility = true;
+            playerModel.dashAbility = true;
             inv.AddCrystals(-dashCost);
+            DashBoughtEvent();
         }
     }
 
+    void BuyRange(int rangeCost)
+    {
+        int rangecost = rangeCost * rangeLevel;
+        if (inv.crystalCurrency >= rangecost)
+        {
+            rangeLevel++;
+            inv.crystalCurrency -= rangeCost;
+            playerModel.fireRange += moreBulletRange;
+        }
+    }
     private void OnDisable()
     {
+        buyRange.ButtonPressedIntValueEvent -= BuyRange;
         buyDash.ButtonPressedIntValueEvent -= BuyDash;
         buyDmg.ButtonPressedIntValueEvent -= BuyMoreDmg;
     }

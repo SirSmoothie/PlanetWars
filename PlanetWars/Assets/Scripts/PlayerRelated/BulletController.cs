@@ -9,6 +9,7 @@ public class BulletController : MonoBehaviour
     public float dmg;
     public float inert = 1;
     public bool hasHitSmth = false;
+    public float bulletRange;
     private void OnCollisionEnter(Collision other)
     {
         IDamageable damageable = other.transform.GetComponent<IDamageable>();
@@ -20,9 +21,9 @@ public class BulletController : MonoBehaviour
         }
     }
 
-    void Thannossed()
+    private void Awake()
     {
-        Destroy(gameObject);
+        Destroy(gameObject, bulletRange);
     }
     private void Update()
     {
