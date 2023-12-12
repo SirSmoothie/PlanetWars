@@ -18,6 +18,9 @@ GameObject:
   - component: {fileID: 2504866280500981949}
   - component: {fileID: 2507494019495164819}
   - component: {fileID: 4503967347683969413}
+  - component: {fileID: 6824115728243651891}
+  - component: {fileID: 5608406895804834260}
+  - component: {fileID: 1409408625741095170}
   m_Layer: 0
   m_Name: Player Blue
   m_TagString: Untagged
@@ -102,23 +105,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eabe4c83fa7d6b4db4cc775ba134794, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
-  turnSpeed: 2
-  DashForce: 50
-  left: 276
-  right: 275
-  forward: 273
-  fire: 274
-  Dash: 305
+  playerModel: {fileID: 6824115728243651891}
+  destroyable: {fileID: 5608406895804834260}
   projectile: {fileID: 8734082258913942902, guid: f1840e251d0300949b19417148f7b951, type: 3}
-  bulletSpeed: 50
-  bulletDmg: 2
-  bulletStrength: 0
   spawnLocation: {fileID: 6443080496888851118}
   bulletFolder: {fileID: 0}
   dashCooldown: 0
   dashCooldownMax: 5
-  dashAbility: 0
+  turnSpeed: 2
+  dashForce: 0
 --- !u!114 &2930927506523372596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingState: {fileID: 4951606514525174237}
-  currentState: {fileID: 0}
+  currentState: {fileID: 4951606514525174237}
 --- !u!114 &4951606514525174237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playingState: {fileID: 4951606514525174237}
-  buttonEvent: {fileID: 0}
+  exitShopButtonEvent: {fileID: 0}
 --- !u!114 &2507494019495164819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,11 +194,76 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a914db7fb3c28043893720425ee450e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 5772452571406850986}
+  playerModel: {fileID: 6824115728243651891}
   inv: {fileID: 2930927506523372596}
   buyDash: {fileID: 0}
   buyDmg: {fileID: 0}
+  buyRange: {fileID: 0}
   moreBulletDmg: 2
+  moreBulletRange: 0
+--- !u!114 &6824115728243651891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524314591558185955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b311791b128268c45be98041fbd70d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  bulletSpeed: 1
+  bulletDmg: 1
+  fireRate: 1
+  dashAbility: 0
+  fireRange: 5
+  playerController: {fileID: 5772452571406850986}
+  playerInput: {fileID: 1409408625741095170}
+--- !u!114 &5608406895804834260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524314591558185955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ee145b08097b764c88775ea2d52580c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 200
+--- !u!114 &1409408625741095170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524314591558185955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 22ca2438cd1205e4cb866221176fbd0f, type: 3}
+  m_NotificationBehavior: 3
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: In Game
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1673997367850486811
 GameObject:
   m_ObjectHideFlags: 0

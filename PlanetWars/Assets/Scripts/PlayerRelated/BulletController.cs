@@ -17,8 +17,9 @@ public class BulletController : MonoBehaviour
         {
             damageable.Damage(dmg);
             hasHitSmth = true;
-            Destroy(gameObject);
+            
         }
+        Destroy(gameObject);
     }
 
     private void Awake()

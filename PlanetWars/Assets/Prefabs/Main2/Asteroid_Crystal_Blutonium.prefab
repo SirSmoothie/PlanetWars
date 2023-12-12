@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5400791922067349767}
   - component: {fileID: 5296728186001219201}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 9108038190425817027}
   - component: {fileID: 5056100264528393591}
   - component: {fileID: 5477647908989666228}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Asteroid_Crystal_Blutonium
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,6 +280,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c4177f2251f8a4a4ca38035dc3ffc32d, type: 3}
       propertyPath: m_Name
       value: AsteroidWIthMaterial
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c4177f2251f8a4a4ca38035dc3ffc32d, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

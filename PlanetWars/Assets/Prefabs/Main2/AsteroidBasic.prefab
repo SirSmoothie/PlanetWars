@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8273253395765297776}
   - component: {fileID: 136552743516429824}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 8248044450127940668}
   - component: {fileID: 1341374412844442472}
   - component: {fileID: 4516953415115741693}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AsteroidBasic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,6 +272,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f11790dfef80ca84eaa838d8dcdd163c, type: 3}
       propertyPath: m_Name
       value: AsteroidNaked
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f11790dfef80ca84eaa838d8dcdd163c, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

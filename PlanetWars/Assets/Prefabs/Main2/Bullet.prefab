@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5770982836930538728}
   - component: {fileID: 2662676867639157637}
   - component: {fileID: 723175297770846239}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ MonoBehaviour:
   dmg: 3
   inert: 1
   hasHitSmth: 0
-  bulletRange: 0.2
+  bulletRange: 55
 --- !u!114 &5770982836930538728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 1481397666049096624}
   - component: {fileID: 505197802587779562}
   - component: {fileID: 8014841034885641816}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

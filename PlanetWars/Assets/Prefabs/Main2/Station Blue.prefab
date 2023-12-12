@@ -583,7 +583,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65569bc7bbd00484090b1eeaa4730ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  opening: {fileID: 8259301417346697719}
+  nextState: {fileID: 8259301417346697719}
+  topDoor: {fileID: 525100465768594132}
+  bottomDoor: {fileID: 3515553253063880145}
+  doorClosedPos: {fileID: 6696116232089615184}
+  Speed: 0
 --- !u!114 &8376000486793861173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -596,7 +600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60e592e3fcaee2349868f8a40a5d995e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closed: {fileID: 4662803723701281988}
+  nextState: {fileID: 4662803723701281988}
   topDoor: {fileID: 525100465768594132}
   bottomDoor: {fileID: 3515553253063880145}
   doorClosedPos: {fileID: 6696116232089615184}
@@ -613,7 +617,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441c92bfe542d454c8f27d216e5abdfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closing: {fileID: 8376000486793861173}
+  nextState: {fileID: 8376000486793861173}
+  topDoor: {fileID: 525100465768594132}
+  topDoorPos: {fileID: 3322115020475517706}
+  bottomDoor: {fileID: 3515553253063880145}
+  bottomDoorPos: {fileID: 5370382517612698291}
+  Speed: 0
 --- !u!114 &8259301417346697719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,8 +635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 673b97dc92d3626448d5a963ea43f668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Opening: 0
-  opened: {fileID: 8744721768423065270}
+  nextState: {fileID: 8744721768423065270}
   topDoor: {fileID: 525100465768594132}
   topDoorPos: {fileID: 3322115020475517706}
   bottomDoor: {fileID: 3515553253063880145}

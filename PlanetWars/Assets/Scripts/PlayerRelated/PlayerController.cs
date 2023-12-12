@@ -1,4 +1,4 @@
-using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -10,23 +10,28 @@ public class PlayerController : MonoBehaviour
     public PlayerModel playerModel;
     public Destroyable destroyable;
     
-    public KeyCode left;
-    public KeyCode right;
-    public KeyCode forward;
-    public KeyCode fire;
-    public KeyCode dash;
-    
     public BulletController projectile;
     public GameObject spawnLocation;
-    public GameObject bulletFolder;
     private Quaternion NoRotation;
-    
+
+    public NotAliveState notAliveState;
+    public Transform ParentTransform;
     public float dashCooldown;
-    public float dashCooldownMax;
+    public float dashCooldownMax = 5;
+    public float fireCooldown;
+    public float fireCooldownMax = 5;
+    public bool fireActive;
     
     private bool currentFire;
 
+    private float TurnDirection;
 
+    public float turnSpeed;
+    public float dashForce;
+    public float speed;
+    public float bulletSpeed;
+    
+    private bool forward;
     private void Start()
     {
        rb = gameObject.GetComponent<Rigidbody>();
@@ -41,42 +46,35 @@ public class PlayerController : MonoBehaviour
 
     void destroy()
     {
-        Destroy(gameObject);
+        GetComponent<StateManager>().ChangeState(notAliveState);
     }
 
     private void OnDisable()
     {
         destroyable.KillObjectEvent -= destroy;
     }
-
-    void Update()
+    public void Interact()
     {
-        
-        if (Input.GetKey(forward))
+        if (!currentFire)
         {
-            Forward(playerModel.speed);
+            fireActive = true;
         }
+    }
 
-        if (Input.GetKey(left))
+    public void StopInteract()
+    {
+        if (currentFire)
         {
-           Turn(-playerModel.turnSpeed);
+            Debug.Log("stopped");
+            //currentFire = false;
+            
         }
-
-        if (Input.GetKey(right))
-        {
-            Turn(playerModel.turnSpeed);
-        }
-        if (Input.GetKey(fire) && !currentFire)
-        {
-            currentFire = true;
-            StartCoroutine(Fire());
-        }
-        if (Input.GetKeyDown(dash) && dashCooldown <= 0 && playerModel.dashAbility)
-        {
-            Dash(playerModel.DashForce);
-            dashCooldown = dashCooldownMax;
-        }
-        else if(dashCooldown >= 0.01)
+        fireActive = false;
+    }
+    
+    void FixedUpdate()
+    {
+        if(dashCooldown >= 0.01)
         {
             dashCooldown -= Time.deltaTime;
         }
@@ -84,31 +82,64 @@ public class PlayerController : MonoBehaviour
         {
             dashCooldown = 0;
         }
+        transform.Rotate(TurnDirection * turnSpeed, 0f, 0f);
+        if (forward)
+        {
+            rb.AddForce(transform.forward * speed,ForceMode.Acceleration);
+        }
+
+        fireCooldown -= Time.deltaTime;
+        if (fireActive)
+        {
+
+            if (fireCooldown < 0)
+            {
+                BulletController clone;
+                clone = Instantiate(projectile, spawnLocation.transform.position, transform.rotation);
+                clone.GetComponent<Rigidbody>().velocity = 
+                    transform.TransformDirection(Vector3.forward * bulletSpeed);
+                clone.dmg = playerModel.bulletDmg;
+                clone.inert = 0;
+                clone.bulletRange = playerModel.fireRange;
+
+                fireCooldown = fireCooldownMax;
+            }
+        }
     }
-    public void Forward(float speed)
+    public void Forward()
     {
-        rb.AddForce(transform.forward * speed,ForceMode.Acceleration);
+        forward = true;
+    }
+    
+    public void stopForward()
+    {
+        forward = false;
     }
 
     public void Turn(float Direction)
     {
-        transform.Rotate(Direction, 0f, 0f);
+        TurnDirection = Direction;
     }
 
-    public void Dash(float DashForce)
+    public void Dash()
     {
-        rb.AddForce(transform.forward * DashForce,ForceMode.Impulse);
+        if (dashCooldown <= 0)
+        {
+            rb.AddForce(transform.forward * dashForce,ForceMode.Impulse);
+            dashCooldown = dashCooldownMax;
+        }
+        
     }
     
-    IEnumerator Fire()
-    {
-        BulletController clone;
-        clone = Instantiate(projectile, spawnLocation.transform.position, transform.rotation, bulletFolder.transform);
-        clone.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * playerModel.bulletSpeed);
-        clone.dmg = playerModel.bulletDmg;
-        clone.inert = 0;
-        clone.bulletRange = playerModel.fireRange;
-        yield return new WaitForSeconds(playerModel.fireRate);
-        currentFire = false;
-    }
+    //IEnumerator Fire()
+    //{
+    //    BulletController clone;
+    //    clone = Instantiate(projectile, spawnLocation.transform.position, transform.rotation, bulletFolder.transform);
+    //    clone.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * playerModel.bulletSpeed);
+    //    clone.dmg = playerModel.bulletDmg;
+    //    clone.inert = 0;
+    //    clone.bulletRange = playerModel.fireRange;
+    //    yield return new WaitForSeconds(playerModel.fireRate);
+    //    currentFire = false;
+    //}
 }

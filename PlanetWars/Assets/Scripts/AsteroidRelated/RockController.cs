@@ -39,4 +39,9 @@ public class RockController : MonoBehaviour
         
         Destroy(gameObject);
     }
+
+    public void DestroyGameObject()
+    {
+        Destroy(gameObject);
+    }
 }
