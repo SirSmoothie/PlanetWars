@@ -17,7 +17,7 @@ public class ShopState : MonoBehaviour
         upragdingState.StopUpgradingEvent += LeaveShop;
         player.transform.DOMove(new Vector3(playerShopPos.transform.position.x, playerShopPos.transform.position.y, playerShopPos.transform.position.z), speed);
         player.transform.DORotate(new Vector3(test, test2,  player.transform.rotation.z), speed);
-        EnterShopEvent();
+        EnterShopEvent?.Invoke();
     }
 
     public delegate void shopWindowOn();
@@ -29,7 +29,7 @@ public class ShopState : MonoBehaviour
     
     void LeaveShop()
     {
-        leftShopEvent();
+        leftShopEvent?.Invoke();
         gameObject.GetComponent<StateManager>().ChangeState(Inside);
     }
     private void OnDisable()

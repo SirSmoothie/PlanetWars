@@ -178,11 +178,11 @@
             ]
         },
         {
-            "name": "In Menu",
+            "name": "InMenu",
             "id": "07780de7-477e-4f11-b3e1-a7080a154e14",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "StartGame",
                     "type": "Button",
                     "id": "73886329-5560-420e-afea-ac5a9e8e54fa",
                     "expectedControlType": "Button",
@@ -195,11 +195,22 @@
                 {
                     "name": "",
                     "id": "4808f218-aea3-4f70-822e-6094cb0ee8d9",
-                    "path": "",
+                    "path": "<Keyboard>/h",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "StartGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e4af6872-6133-4b5c-a7a7-37b8eda3775b",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StartGame",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

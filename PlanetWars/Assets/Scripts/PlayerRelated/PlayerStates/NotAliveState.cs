@@ -6,9 +6,12 @@ using UnityEngine;
 public class NotAliveState : MonoBehaviour
 {
     public GameObject View;
+    public PlayerController playerController;
     private void OnEnable()
     {
-        GameManager.Instance.Players.Remove(gameObject);
-        View.gameObject.SetActive(false);
+        View.SetActive(false);
+        playerController.enabled = false;
+        GameManager.Instance.removePlayer(playerController.PlayerIndex);
+        GameManager.Instance.PlayerUpdate();
     }
 }

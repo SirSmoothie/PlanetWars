@@ -33,10 +33,14 @@ public class WorldGenerator2 : MonoBehaviour
     public PlayerInputManager playerInputManager;
 
     public int spawnPoints;
+
+    private int PlayerNo = 0;
     private void Start()
     {
         perlinOffset.x = Random.Range(-99999, 99999);
         perlinOffset.y = Random.Range(-99999, 99999);
+        
+        GenerateLevel();
     }
 
     public float CalculatePerlin(float x, float y)
@@ -113,8 +117,8 @@ public class WorldGenerator2 : MonoBehaviour
     {
         if (findingNewSpot)
         {
-            var x = Random.Range(0, radius);
-            var y = Random.Range(0, radius);
+            var x = Random.Range(0, radius*2);
+            var y = Random.Range(0, radius*2);
             if (CheckSpawn(x, y))
             {
                 PlayerSpawnPoint.transform.position = new Vector3(x, y, 0);
@@ -129,7 +133,7 @@ public class WorldGenerator2 : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(PlayerSpawnPoint.transform.position, ShipRadius, int.MaxValue, QueryTriggerInteraction.Collide);
         foreach (var variable in hitColliders)
         {
-            variable.GetComponent<RockController>().DestroyGameObject();
+            variable.GetComponent<RockController>()?.DestroyGameObject();
         }
         if (newSpotAvaliable)
         {
@@ -145,6 +149,8 @@ public class WorldGenerator2 : MonoBehaviour
     private void PlayerInputManagerOnonPlayerJoined(PlayerInput aObj)
     {
         aObj.transform.GetComponent<PlayerController>().ParentTransform.position = new Vector3(PlayerSpawnPoint.transform.position.x, PlayerSpawnPoint.transform.position.y, 0);
+        aObj.transform.GetComponent<PlayerController>().PlayerIndex = PlayerNo;
+        PlayerNo++;
         PlaceNewPlayer();
     }
 }

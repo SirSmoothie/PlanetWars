@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     public float bulletSpeed;
     
     private bool forward;
+
+    public int PlayerIndex;
     private void Start()
     {
        rb = gameObject.GetComponent<Rigidbody>();
@@ -44,7 +46,7 @@ public class PlayerController : MonoBehaviour
         destroyable.KillObjectEvent += destroy;
     }
 
-    void destroy()
+    public void destroy()
     {
         GetComponent<StateManager>().ChangeState(notAliveState);
     }

@@ -13,5 +13,9 @@ public class WorldGenerator2Editor : Editor
         {
             (target as WorldGenerator2)?.GenerateLevel();
         }
+        if (GUILayout.Button("New Spawn Location"))
+        {
+            (target as WorldGenerator2)?.FindNewPlayer();
+        }
     }
 }

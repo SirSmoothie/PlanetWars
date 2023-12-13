@@ -2,14 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
     public GameObject player1;
     public GameObject player2;
-
+    
     public List<GameObject> Players;
+    public List<GameObject> AllThePlayers;
 
+    public int countOfAlivePlayers;
+    public GameObject UI;
+    private bool GameStarted;
     public delegate void Player1Died();
     public event Player1Died Player2WinsEvent;
 
@@ -23,13 +28,54 @@ public class GameManager : Singleton<GameManager>
     {
         Player1WinsEvent?.Invoke();
     }
-
-    private void Update()
+    
+    public delegate void GameStart();
+    public event GameStart GameStartEvent;
+    public void StartGame()
     {
-        if (Players.Count <= 1)
+        GameStartEvent?.Invoke();
+        AllThePlayers = Players;
+        countOfAlivePlayers = Players.Count;
+    }
+
+    public void PlayerUpdate()
+    {
+        for (int i = 0; i < AllThePlayers.Count; i++)
         {
-            
+            countOfAlivePlayers = AllThePlayers.Count;
+            if (Players[i] == null)
+            {
+                countOfAlivePlayers--;
+            }
+
+            if (countOfAlivePlayers <= 1)
+            {
+                var index = 0;
+                var score = 0;
+                for (int indexOfPlayer = 0; index < AllThePlayers.Count; index++)
+                {
+                    if (Players[indexOfPlayer].GetComponent<PlayerController>())
+                    {
+                        index = Players[indexOfPlayer].GetComponent<PlayerController>().PlayerIndex;
+                        score = Players[indexOfPlayer].GetComponent<PlayerInventory>().crystalCurrency;
+                    }
+                }
+                
+                
+                    UI.gameObject.GetComponent<WinningPlayerUI>()?.DisplayWinner(index, score);
+                    StartCoroutine(WaitToRestart());
+            }
         }
+    }
+
+    IEnumerator WaitToRestart()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene("NewMain", LoadSceneMode.Single);
+    }
+    public void removePlayer(int index)
+    {
+        Players.RemoveAt(index);
     }
 
     protected override void Initialize()

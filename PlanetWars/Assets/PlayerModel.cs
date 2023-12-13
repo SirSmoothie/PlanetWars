@@ -28,6 +28,8 @@ public class PlayerModel : MonoBehaviour
 
         playerInput.actions.FindAction("Turn").performed += OnCarTurnOnperformed;
         playerInput.actions.FindAction("Turn").canceled += OnCarTurnOnperformed;
+
+        playerInput.actions.FindAction("StartGame").performed += aContext => GameManager.Instance.StartGame();
         
         GameManager.Instance.Players.Add(gameObject);
     }
@@ -52,5 +54,21 @@ public class PlayerModel : MonoBehaviour
         {
             playerController.Turn(0);
         }
+    }
+
+    private void OnEnable()
+    {
+        GameManager.Instance.GameStartEvent += SwitchControl;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.GameStartEvent -= SwitchControl;
+    }
+
+    public void SwitchControl()
+    {
+        playerInput.actions.FindActionMap("InMenu").Disable();
+        playerInput.actions.FindActionMap("In Game").Enable();
     }
 }

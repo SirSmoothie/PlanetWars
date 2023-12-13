@@ -5,25 +5,39 @@ using UnityEngine;
 
 public class PointTowards : MonoBehaviour
 {
-    public GameObject pointToLast;
-    public GameObject pointToCurrent;
+    public GameObject pointTo;
     public float maxRadians;
-    public bool notActive;
-    private void Update()
+    public GameObject Player;
+    private int ourIndex;
+
+    private void Start()
     {
-        if (notActive)
+        ourIndex = Player.GetComponent<PlayerController>().PlayerIndex;
+    }
+
+    public void Update()
+    {
+        if (pointTo == null)
         {
-            //sets the objects location to the gameobjects position PointToLast if the playerActivator is not active.
-            Vector3 targetDirection = pointToLast.transform.position - gameObject.transform.position;
-            Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, maxRadians, 0f);
-            gameObject.transform.rotation = Quaternion.LookRotation(newDirection);
+            FindStation();
         }
-        else
-        {
-            //While the player has control of the player it sets the position of where the cannon should point to to the current mouse position.
-            Vector3 targetDirection = pointToCurrent.transform.position - gameObject.transform.position;
+            //sets the objects location to the gameobjects position PointToLast if the playerActivator is not active.
+            Vector3 targetDirection = pointTo.transform.position - gameObject.transform.position;
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, maxRadians, 0f);
             gameObject.transform.rotation = Quaternion.LookRotation(newDirection);
+    }
+
+    public void FindStation()
+    {
+        var pointTolist = FindObjectsOfType<SpaceShip>();
+
+        foreach (var VARIABLE in pointTolist)
+        {
+            if (VARIABLE.SpaceshipIndex == ourIndex)
+            {
+                return;
+            }
+            pointTo = VARIABLE.transform.gameObject;
         }
     }
 }

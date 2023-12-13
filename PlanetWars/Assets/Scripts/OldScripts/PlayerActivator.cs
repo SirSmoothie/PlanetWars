@@ -25,13 +25,13 @@ public class PlayerActivator : MonoBehaviour
         {
             //if its activates it gives the player control of the cannon/Controller.
             controller.SetActive(true);
-            cannonView.GetComponent<PointTowards>().notActive = false;
+            //cannonView.GetComponent<PointTowards>().notActive = false;
         }
         else
         {
             //otherwise the child Controller is set to false.
             controller.SetActive(false);
-            cannonView.GetComponent<PointTowards>().notActive = true;
+            //cannonView.GetComponent<PointTowards>().notActive = true;
         }
 
         if (!Alive)

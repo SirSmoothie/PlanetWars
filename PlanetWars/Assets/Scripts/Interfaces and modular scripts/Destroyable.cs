@@ -25,6 +25,6 @@ public class Destroyable : MonoBehaviour, IDamageable
     public event KillObject KillObjectEvent;
     private void Die()
     {
-        KillObjectEvent();
+        KillObjectEvent?.Invoke();
     }
 }
